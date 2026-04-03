@@ -10,7 +10,8 @@ from src.dataset import ID2LABEL, LABEL2ID
 # ── Config ────────────────────────────────────────────────────────────────────
 MAX_LENGTH = 128
 DEVICE     = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_PATH = "outputs/models/best_model.pt"
+MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
+                          "outputs/models/best_model.pt")
 
 LABEL_DESCRIPTIONS = {
     "ADHD":       "Posts suggest themes common in ADHD communities — focus, distraction, impulsivity, productivity struggles.",
@@ -124,4 +125,4 @@ with gr.Blocks(title="Mental Health Signal Detector") as demo:
     clear_btn.click(lambda: ("", {}, "", ""), outputs=[text_input, label_output, summary_output, disclaimer_output])
 
 if __name__ == "__main__":
-    demo.launch(share=True)
+    demo.launch()
